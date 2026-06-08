@@ -44,6 +44,16 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.buyabusiness-india.com" }],
+        destination: "https://buyabusiness-india.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

@@ -61,6 +61,7 @@ export const metadata: Metadata = {
     canonical: "https://buyabusiness-india.com",
     languages: {
       "en-IN": "https://buyabusiness-india.com",
+      "x-default": "https://buyabusiness-india.com",
     },
   },
 };

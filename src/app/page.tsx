@@ -3,6 +3,29 @@ import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { FAQSchema } from "@/components/schema/FAQSchema";
 import { getMDXContent, extractFAQs } from "@/lib/mdx";
 
+const FALLBACK_FAQS = [
+  {
+    question: "Is buying a business a good investment in India?",
+    answer: "Buying a profitable business can be an excellent investment, often yielding 25-40% cash-on-cash returns compared to 10-15% from real estate or stocks. When you acquire a business at 2.5-3x annual profit and maintain that profitability, you're effectively earning 33-40% annually on your investment.",
+  },
+  {
+    question: "How long does it take to buy a business in India?",
+    answer: "A typical business acquisition in India takes 4-9 months from starting your search to closing the deal. The timeline breaks down roughly as: search and screening (2-4 months), due diligence (4-8 weeks), negotiation and documentation (4-8 weeks), and closing (1-2 weeks).",
+  },
+  {
+    question: "Can NRIs buy businesses in India?",
+    answer: "Yes, NRIs can acquire businesses in India under RBI's automatic route for most sectors, though some industries require specific approvals. Most NRI buyers structure acquisitions through private limited companies. Key considerations include repatriation rules, FEMA compliance, and tax implications.",
+  },
+  {
+    question: "What are the risks of buying an existing business?",
+    answer: "The main risks include overpaying, inheriting hidden liabilities, customer concentration, and owner dependency. Thorough due diligence mitigates most risks — never skip this step to save time or money.",
+  },
+  {
+    question: "Do I need a lawyer to buy a business?",
+    answer: "Yes, always engage a lawyer experienced in M&A transactions for any business acquisition above ₹10 lakh. Legal fees typically run 1-2% of deal value for small transactions and 0.5-1% for larger deals.",
+  },
+];
+
 const stats = [
   { value: "63M+", label: "SMBs in India" },
   { value: "<20", label: "Active PE firms in SMB space" },
@@ -38,9 +61,10 @@ const guides = [
 ];
 
 export default function HomePage() {
-  // Load MDX content for FAQs
+  // Load MDX content for FAQs, fall back to hardcoded if extraction fails
   const { content } = getMDXContent('homepage.mdx');
-  const faqs = extractFAQs(content);
+  const extracted = extractFAQs(content);
+  const faqs = extracted.length > 0 ? extracted : FALLBACK_FAQS;
 
   return (
     <>

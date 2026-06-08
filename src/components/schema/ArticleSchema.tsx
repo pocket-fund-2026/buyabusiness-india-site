@@ -48,7 +48,9 @@ export function ArticleSchema({
     ...(image && {
       image: {
         "@type": "ImageObject",
-        url: image,
+        url: image.startsWith("/")
+          ? `https://buyabusiness-india.com${image}`
+          : image,
       },
     }),
   };
